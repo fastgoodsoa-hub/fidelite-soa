@@ -107,7 +107,7 @@ function startScan(){
     document.getElementById('reader').innerHTML='<p style="font-size:12px;color:#a33;padding:12px">Caméra indisponible — utilise la saisie manuelle.</p>';
   });
 }
-function stopScan(cb){if(scanner){scanner.stop().then(function(){scanner.clear();scanner=null;cb&&cb();}).catch(function(){scanner=null;cb&&cb();});}else{cb&&cb();}}
+function stopScan(cb){if(scanner){try{var pr=scanner.stop();if(pr&&pr.then){pr.then(function(){try{scanner.clear();}catch(e){}scanner=null;cb&&cb();}).catch(function(){scanner=null;cb&&cb();});}else{scanner=null;cb&&cb();}}catch(e){scanner=null;cb&&cb();}}else{cb&&cb();}}
 function onScan(text){stopScan(function(){loadClient(text);});}
 document.getElementById('manual-go').onclick=function(){var v=document.getElementById('manual-id').value.trim();if(v){stopScan(function(){loadClient(v);});}};
 

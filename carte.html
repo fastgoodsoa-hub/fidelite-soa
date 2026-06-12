@@ -46,7 +46,7 @@
       <div class="grid" id="grid"></div>
       <div class="heart" id="reward"><svg viewBox="0 0 104 94" preserveAspectRatio="none" aria-hidden="true">
         <path d="M52 90 C16 64 6 40 18 24 C28 11 44 14 52 28 C60 14 76 11 86 24 C98 40 88 64 52 90 Z"/></svg>
-        <span id="reward-txt">1 plat<br>offert</span></div>
+        <span id="reward-txt">9 €<br>offerts</span></div>
     </div>
     <div class="foot"><div id="qrcode"></div>
       <small>Présente ce QR au comptoir SOA pour faire ajouter un tampon.</small></div>
@@ -68,7 +68,7 @@ function renderCard(prenom,tampons,offerts,seuil,id){
   build(seuil);var ang=seededAngles(id,seuil);
   for(var i=0;i<seuil;i++){if(i<tampons){var im=document.createElement('img');im.className='stamp';im.src=LOGO;im.style.setProperty('--rot',ang[i]+'deg');im.style.transform='rotate('+ang[i]+'deg)';document.getElementById('slot'+i).appendChild(im);}}
   var r=document.getElementById('reward'),t=document.getElementById('reward-txt');
-  if(offerts>0){r.classList.add('on');t.innerHTML=(offerts>1?offerts+' plats<br>offerts':'1 plat<br>offert');}
+  if(offerts>0){r.classList.add('on');t.innerHTML=(offerts>1?(offerts*9)+' €<br>offerts':'9 €<br>offerts');}
   document.getElementById('state').textContent=tampons+' / '+seuil+' tampons'+(offerts>0?' · '+offerts+' plat(s) offert(s) à réclamer':'');
 }
 function makeQR(id){new QRCode(document.getElementById('qrcode'),{text:id,width:96,height:96,colorDark:MARINE,colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});}

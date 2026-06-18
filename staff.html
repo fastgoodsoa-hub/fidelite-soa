@@ -123,8 +123,8 @@ function showClient(d){
   show('screen-client');
   document.getElementById('adj-panel').classList.add('hide');
   document.getElementById('c-nom').textContent=d.prenom||'Client';
-  document.getElementById('c-cnt').textContent=d.tampons+' / '+(d.seuil||9)+' tampons';
-  document.getElementById('c-badge').innerHTML=(d.offerts>0)?'<span class="badge">'+d.offerts+' \u00d7 9\u20ac offerts</span>':'';
+  document.getElementById('c-cnt').textContent=d.tampons+' / '+(d.seuil||10)+' tampons';
+  document.getElementById('c-badge').innerHTML=(d.offerts>0)?'<span class="badge">'+d.offerts+' \u00d7 10\u20ac offerts</span>':'';
   document.getElementById('act-reward').classList.toggle('hide',!(d.offerts>0));
   document.getElementById('act-adjust').classList.toggle('hide',!ADMIN);
   document.getElementById('act-stamp').classList.remove('hide');
@@ -137,15 +137,15 @@ function handleStaffErr(d){
 document.getElementById('act-stamp').onclick=function(){
   api('addStamp',{id:curId,code:CODE}).then(function(d){
     if(!d.ok){handleStaffErr(d);return;}
-    if(d.debloque){flash('c-toast','big','\ud83c\udf89 Carte pleine — 9\u20ac offerts d\u00e9bloqu\u00e9s !');}
-    else{flash('c-toast','ok','Tampon ajout\u00e9 ('+d.tampons+'/'+(d.seuil||9)+')');}
+    if(d.debloque){flash('c-toast','big','\ud83c\udf89 Carte pleine — 10\u20ac offerts d\u00e9bloqu\u00e9s !');}
+    else{flash('c-toast','ok','Tampon ajout\u00e9 ('+d.tampons+'/'+(d.seuil||10)+')');}
     showClient({prenom:curData.prenom,tampons:d.tampons,offerts:d.offerts,seuil:d.seuil});
   });
 };
 document.getElementById('act-reward').onclick=function(){
   api('useReward',{id:curId,code:CODE}).then(function(d){
     if(!d.ok){handleStaffErr(d);return;}
-    flash('c-toast','ok','9\u20ac offerts valid\u00e9s');
+    flash('c-toast','ok','10\u20ac offerts valid\u00e9s');
     showClient({prenom:curData.prenom,tampons:d.tampons,offerts:d.offerts,seuil:d.seuil});
   });
 };
